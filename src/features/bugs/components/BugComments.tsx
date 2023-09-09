@@ -64,7 +64,6 @@ const BugComments = ({ Bug }: BugCommentsProps) => {
           </div>
         </Comment>
       ))}
-
     </div>
   );
 };
