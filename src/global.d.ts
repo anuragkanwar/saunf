@@ -9,7 +9,6 @@ export type ApiResponse<T> = {
 };
 
 
-
 export type UserType = {
   id: number
   firstName: string
@@ -37,8 +36,8 @@ export type CommentType = {
   id: number
   content: string
   commenter: UserType
-  referredProject: string
-  referredBug: string
+  referredProject: ProjectType
+  referredBug: BugType
   createdAt: Date
   updateAt: Date
 };

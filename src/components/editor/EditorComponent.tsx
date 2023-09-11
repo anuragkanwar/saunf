@@ -3,6 +3,8 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { EditorState, convertToRaw } from 'draft-js';
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { MyS3Client } from "@/lib/S3Client.ts";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
 
 type EditorComponentProps = {
   contentState: EditorState,
@@ -54,7 +56,29 @@ export const EditorComponent = ({
             bold: { className: `aria-selected:bg-primary` }
           },
           image: {
-            isDropdown: true, uploadEnabled: true, className: 'demo-option-custom', popupClassName: 'demo-popup-custom'
+            isDropdown: true,
+            uploadEnabled: true,
+            urlEnabled: true,
+            className: 'demo-option-custom',
+            popupClassName: 'demo-popup-custom',
+            previewImage: true,
+            defaultSize: {
+              height: '300',
+              width: '400',
+            },
+            uploadCallback: async (file: File) => {
+              const uri = URL.createObjectURL(file);
+              const fileName = uri.substring(27) + `${file.lastModified}` + `${file.size}`;
+              await MyS3Client.send(new PutObjectCommand({
+                Bucket: `${import.meta.env.VITE_AWS_BUCKET_NAME}`,
+                Key: fileName,
+                Body: file,
+                ACL: "public-read",
+                ContentType: file.type
+              }));
+              const link = `https://${import.meta.env.VITE_AWS_BUCKET_NAME}.s3.amazonaws.com/${fileName}`;
+              return Promise.resolve({ data: { link } });
+            }
           }
         }}
       />
