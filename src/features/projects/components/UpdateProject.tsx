@@ -27,17 +27,36 @@ export const UpdateProject = ({ projectName }: UpdateProjectProps) => {
   const [isProjectAddingLoading, setIsProjectAddingLoading] = useState(false);
   const [newProjectState, newProjectStateDispatcher] = useReducer(AddNewProjectReducer, {
     id: project?.data?.data?.id,
-    name: project?.data?.data?.name,
-    projectKey: project?.data?.data?.projectKey,
+    name: project?.data?.data?.name || "",
+    projectKey: project?.data?.data?.projectKey || "",
     teams: project?.data?.data?.teams.reduce<{ id: number }[]>((acc, cv) => {
       acc.push({ id: cv.id });
       return acc;
-    }, []),
-    startDate: project?.data?.data?.startDate,
-    targetDate: project?.data?.data?.targetEndDate,
+    }, []) || [],
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    startDate: project?.data?.data?.startDate || "",
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    targetDate: project?.data?.data?.targetEndDate || "",
     manager: {
-      id: project?.data?.data?.manager?.id
+      id: project?.data?.data?.manager?.id || -1
     },
+  }, () => {
+    return {
+      id: project?.data?.data?.id,
+      name: project?.data?.data?.name,
+      projectKey: project?.data?.data?.projectKey,
+      teams: project?.data?.data?.teams.reduce<{ id: number }[]>((acc, cv) => {
+        acc.push({ id: cv.id });
+        return acc;
+      }, []),
+      startDate: project?.data?.data?.startDate,
+      targetDate: project?.data?.data?.targetEndDate,
+      manager: {
+        id: project?.data?.data?.manager?.id
+      },
+    };
   });
 
 
@@ -76,6 +95,8 @@ export const UpdateProject = ({ projectName }: UpdateProjectProps) => {
         isRequired={true}
         variant="bordered"
         value={newProjectState.name}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         onValueChange={value => newProjectStateDispatcher(AddNewProjectReducerActions.setAddNewProjectReducerName(value))}
       />
       <Input
@@ -86,6 +107,8 @@ export const UpdateProject = ({ projectName }: UpdateProjectProps) => {
         type="text"
         variant="bordered"
         value={newProjectState.projectKey}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         onValueChange={value => newProjectStateDispatcher(AddNewProjectReducerActions.setAddNewProjectProjectKey(value))}
       />
       <div className={"w-full flex flex-row gap-2"}>
@@ -99,6 +122,8 @@ export const UpdateProject = ({ projectName }: UpdateProjectProps) => {
           value={DateTime.fromISO(newProjectState.startDate).toFormat("yyyy-MM-dd")}
           onValueChange={value => {
             console.log(value);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             newProjectStateDispatcher(AddNewProjectReducerActions.setAddNewProjectStartDate(
               DateTime.fromFormat(value, "yyyy-MM-dd").toUTC().toISO() || ""));
           }}
@@ -111,6 +136,8 @@ export const UpdateProject = ({ projectName }: UpdateProjectProps) => {
           value={DateTime.fromISO(newProjectState.targetDate).toFormat("yyyy-MM-dd")}
           onValueChange={value => {
             console.log(value);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             newProjectStateDispatcher(AddNewProjectReducerActions.setAddNewProjectTargetDate(
               DateTime.fromFormat(value, "yyyy-MM-dd").toUTC().toISO() || ""));
           }}
@@ -124,6 +151,8 @@ export const UpdateProject = ({ projectName }: UpdateProjectProps) => {
         isRequired={true}
         placeholder={"Select Teams"}
         selectionMode={"multiple"}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         selectedKeys={newProjectState.teams.reduce((acc: string[], cv) => {
           acc.push(cv.id.toString());
           return acc;
@@ -133,6 +162,8 @@ export const UpdateProject = ({ projectName }: UpdateProjectProps) => {
           for (const ele of x) {
             newTeams.push({ id: Number(ele) });
           }
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           newProjectStateDispatcher(AddNewProjectReducerActions.setProjectTeam(newTeams));
         }}
       >

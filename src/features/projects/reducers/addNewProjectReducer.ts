@@ -1,4 +1,3 @@
-import { DateTime } from "luxon";
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
 export type AddNewProjectInitialStateType = {
@@ -18,7 +17,7 @@ export const AddNewProjectReducerInitialState: AddNewProjectInitialStateType = {
   manager: { id: -1 },
   name: "",
   projectKey: "",
-  startDate: DateTime.utc().toISO() || "",
+  startDate:  "",
   targetDate: "",
   teams: []
 };
