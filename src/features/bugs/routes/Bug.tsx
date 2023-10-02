@@ -1,4 +1,4 @@
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { ContentLayout } from "@/components";
 import { useBoolean, useCopyToClipboard } from "usehooks-ts";
 import { Button, Spinner, Switch } from "@nextui-org/react";

@@ -160,7 +160,7 @@ export const BugTableComponent = ({ projectName }: BugTableComponentProps) => {
         return (
           <NavLink
             className={"font-medium hover:text-primary transition-all duration-300 "}
-            to={`./${project?.data?.data?.projectKey}${bug.bugKey}`}>{bug.summary}</NavLink>
+            to={`./${project?.data?.data?.projectKey}-${bug.bugKey}`}>{bug.summary}</NavLink>
         );
       case "bugStatus":
         return (

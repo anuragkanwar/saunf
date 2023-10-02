@@ -34,12 +34,14 @@ type BugComponentProps = {
 }
 
 export const BugComponent = ({ setTempState, isAuthor, bugKey, projectName, isEditable }: BugComponentProps) => {
-  const bugId = Number(bugKey.substring(3));
+  const bugId = Number(bugKey.split('-')[1]);
   const userId = useAppSelector(state => state.user.entities?.id);
   const projects = queryClient.getQueryData<ApiResponse<ProjectType[]>>(["allBugs"]);
   let projectId = -1;
   if (projects && projects.data)
     projectId = giveProjectIdByName(projects.data, projectName);
+
+  console.log(bugKey, bugId, projectId);
   const Bug = useGetBugById({ bugId: bugId, projectId: projectId, config: {} });
 
 

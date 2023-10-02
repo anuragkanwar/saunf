@@ -1,12 +1,12 @@
 import {
   HiOutlineBugAnt,
-  HiOutlineClock,
   HiOutlineCog8Tooth,
   HiOutlineSquare3Stack3D,
   HiOutlineSquares2X2,
   HiOutlineUsers
 } from "react-icons/hi2";
 import { IconType } from "react-icons";
+import LOGO from "@/assets/Images/logo-dark.png";
 import clsx from "clsx";
 import { NavLink, } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -19,6 +19,7 @@ import { NewTeamModal } from "@/features/teams/components/NewTeamModal.tsx";
 import { NewBugModal } from "@/features/bugs/components/NewBugModal.tsx";
 import { NewProjectModal } from "@/features/projects/components/NewProjectModal.tsx";
 import { useGetAllBugs } from "@/features";
+import { Image } from "@nextui-org/react";
 
 
 export type SideNavigationItem = {
@@ -190,7 +191,9 @@ export const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: SidebarType) => {
     >
       <motion.div className={clsx(["flex w-full flex-col"])}>
         <div className=" flex h-0 flex-1 flex-col">
-          <div className="flex h-16 items-center px-4 text-white rounded-br-md bg-primary-600">LOGO</div>
+          <div className="flex h-16 items-center px-2 text-white rounded-br-md bg-primary-600">
+            <Image src={LOGO} width={50} height={80}/>
+          </div>
           <div className="flex-1 mt-2 max-h-full bg-white rounded-t-md overflow-y-scroll">
             <nav className="flex-1 py-4">
               <ul className={"flex p-0 h-full flex-col gap-1 space-y-1"}>
@@ -199,7 +202,6 @@ export const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: SidebarType) => {
             </nav>
           </div>
           <div className="bg-white flex h-16 flex-shrink-0 items-center px-4">
-            LOGO
           </div>
         </div>
       </motion.div>

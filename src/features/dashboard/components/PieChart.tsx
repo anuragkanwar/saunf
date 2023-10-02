@@ -67,13 +67,13 @@ export const PieChart = ({ data }: PieChartProps) => {
       fill={[
         {
           match: {
-            id: 'ruby'
+            id: 'fixed'
           },
-          id: 'dots'
+          id: 'lines'
         },
         {
           match: {
-            id: 'c'
+            id: 'open'
           },
           id: 'dots'
         },
@@ -91,7 +91,7 @@ export const PieChart = ({ data }: PieChartProps) => {
         },
         {
           match: {
-            id: 'scala'
+            id: 'c'
           },
           id: 'lines'
         },
@@ -103,13 +103,13 @@ export const PieChart = ({ data }: PieChartProps) => {
         },
         {
           match: {
-            id: 'elixir'
+            id: 'in progress'
           },
           id: 'lines'
         },
         {
           match: {
-            id: 'javascript'
+            id: 'open'
           },
           id: 'lines'
         }
@@ -121,8 +121,7 @@ export const PieChart = ({ data }: PieChartProps) => {
           justify: false,
           translateX: 0,
           translateY: 56,
-          itemsSpacing: 0,
-          itemWidth: 100,
+          itemWidth: 80,
           itemHeight: 18,
           itemTextColor: '#999',
           itemDirection: 'left-to-right',
