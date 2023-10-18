@@ -8,6 +8,7 @@ import { useAppDispatch } from "@/hooks";
 import { addUser } from "@/store";
 import { ImGithub } from "react-icons/im";
 import { NavLink } from "react-router-dom";
+import { useBoolean } from "usehooks-ts";
 
 
 type LoginFormProps = {
@@ -21,14 +22,29 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const [isError, setIsError] = useState(false);
   const dispatch = useAppDispatch();
   const login = useLogin();
-
+  const isUserLoginLoading = useBoolean(false);
+  const isDemoUserLoginLoading = useBoolean(false);
   const handleLogin = async () => {
-    console.log({ email, password });
+    isUserLoginLoading.setTrue();
     const res = await login.mutateAsync({ username: email, password: password });
     if (res.success) {
+      isUserLoginLoading.setFalse();
       dispatch(addUser(res.data));
       onSuccess();
     } else {
+      isUserLoginLoading.setFalse();
+      setIsError(true);
+    }
+  };
+  const handleDemoLogin = async () => {
+    isDemoUserLoginLoading.setTrue();
+    const res = await login.mutateAsync({ username: "kk@gmail.com", password: "12345" });
+    if (res.success) {
+      isDemoUserLoginLoading.setFalse();
+      dispatch(addUser(res.data));
+      onSuccess();
+    } else {
+      isDemoUserLoginLoading.setFalse();
       setIsError(true);
     }
   };
@@ -36,33 +52,33 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const toggleVisibility = () => setIsVisible(!isVisible);
   return (
     <>
-      <div className={"font-medium"}>
-        <div className={"mb-4"}>
-          Sign in with Open account
-        </div>
-        <div className={"flex flex-row justify-between gap-2"}>
-          <Button
-            color={"default"}
-            variant={"ghost"}
-            fullWidth={true}
-          >
-            <FcGoogle size={"22"}/>
-            Google
-          </Button>
+      {/*<div className={"font-medium"}>*/}
+      {/*  <div className={"mb-4"}>*/}
+      {/*    Sign in with Open account*/}
+      {/*  </div>*/}
+      {/*  <div className={"flex flex-row justify-between gap-2"}>*/}
+      {/*    <Button*/}
+      {/*      color={"default"}*/}
+      {/*      variant={"ghost"}*/}
+      {/*      fullWidth={true}*/}
+      {/*    >*/}
+      {/*      <FcGoogle size={"22"}/>*/}
+      {/*      Google*/}
+      {/*    </Button>*/}
 
-          <Button
-            color={"default"}
-            variant={"ghost"}
-            fullWidth={true}
-          >
-            <ImGithub size={"22"}/>
-            Github
-          </Button>
-        </div>
-      </div>
+      {/*    <Button*/}
+      {/*      color={"default"}*/}
+      {/*      variant={"ghost"}*/}
+      {/*      fullWidth={true}*/}
+      {/*    >*/}
+      {/*      <ImGithub size={"22"}/>*/}
+      {/*      Github*/}
+      {/*    </Button>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
       <Divider className="my-8"/>
       <div className={""}>
-        Or continue with email address
+        Continue with email address
       </div>
       <form className={"flex flex-col mt-4"}>
         <Input
@@ -70,7 +86,6 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
           isClearable
           type="email"
           label="Email"
-          defaultValue={"emp1@gmail.com"}
           variant="bordered"
           validationState={isError ? "invalid" : "valid"}
           onClear={() => console.log("input cleared")}
@@ -85,7 +100,6 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
           autoComplete={"true"}
           fullWidth={true}
           label="Password"
-          defaultValue={"12345"}
           variant="bordered"
           validationState={isError ? "invalid" : "valid"}
           onValueChange={(pass) => {
@@ -108,12 +122,22 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
           <Checkbox size="sm">Remember Me</Checkbox>
           <Link size={"sm"}>Password Recovery</Link>
         </div>
-        <Button
-          fullWidth={true}
-          color={"primary"}
-          onClick={handleLogin}
-        >LOGIN
-        </Button>
+        <div className={"flex flex-col gap-2"}>
+          <Button
+            fullWidth={true}
+            color={"primary"}
+            onClick={handleLogin}
+            isLoading={isUserLoginLoading.value}
+          >LOGIN
+          </Button>
+          <Button
+            fullWidth={true}
+            color={"default"}
+            onClick={handleDemoLogin}
+            isLoading={isDemoUserLoginLoading.value}
+          >DEMO LOGIN
+          </Button>
+        </div>
       </form>
       <div className={"mt-4"}>
         <span>Don’t have an account? </span>

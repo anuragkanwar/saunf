@@ -5,7 +5,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-  Input,
+  Input, Select, SelectItem,
 } from "@nextui-org/react";
 import React, { useReducer, useState } from "react";
 import { HiOutlineEyeSlash } from "react-icons/hi2";
@@ -29,7 +29,8 @@ type RegisterFormProps = {
 
 export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible1, setIsVisible1] = useState(false);
+  const [isVisible2, setIsVisible2] = useState(false);
   const [registerState, registerDispatcher] = useReducer(RegisterFormReducer, {
     firstName: "",
     lastName: "",
@@ -44,7 +45,8 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
   const register = useRegister();
 
-  const toggleVisibility = () => setIsVisible(!isVisible);
+  const toggleVisibility1 = () => setIsVisible1(!isVisible1);
+  const toggleVisibility2 = () => setIsVisible2(!isVisible2);
   const validateEmail = (value: string) => value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
   const validationState = React.useMemo(() => {
     if (registerState.email === "") return undefined;
@@ -58,33 +60,33 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
   };
   return (
     <>
-      <div className={"font-medium"}>
-        <div className={"mb-2"}>
-          Sign up with Open account
-        </div>
-        <div className={"flex flex-row justify-between gap-2"}>
-          <Button
-            color={"default"}
-            variant={"ghost"}
-            fullWidth={true}
-          >
-            <FcGoogle size={"22"}/>
-            Google
-          </Button>
+      {/*<div className={"font-medium"}>*/}
+      {/*  <div className={"mb-2"}>*/}
+      {/*    Sign up with Open account*/}
+      {/*  </div>*/}
+      {/*  <div className={"flex flex-row justify-between gap-2"}>*/}
+      {/*    <Button*/}
+      {/*      color={"default"}*/}
+      {/*      variant={"ghost"}*/}
+      {/*      fullWidth={true}*/}
+      {/*    >*/}
+      {/*      <FcGoogle size={"22"}/>*/}
+      {/*      Google*/}
+      {/*    </Button>*/}
 
-          <Button
-            color={"default"}
-            variant={"ghost"}
-            fullWidth={true}
-          >
-            <ImGithub size={"22"}/>
-            Github
-          </Button>
-        </div>
-      </div>
+      {/*    <Button*/}
+      {/*      color={"default"}*/}
+      {/*      variant={"ghost"}*/}
+      {/*      fullWidth={true}*/}
+      {/*    >*/}
+      {/*      <ImGithub size={"22"}/>*/}
+      {/*      Github*/}
+      {/*    </Button>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
       <Divider className="my-4"/>
       <div className={""}>
-        Or continue with email address
+        Continue with email address
       </div>
       <form className={"flex flex-col mt-2"}>
         <div className={"flex flex-row gap-2"}>
@@ -163,15 +165,15 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
             registerDispatcher(setPassword(value));
           }}
           endContent={
-            <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
-              {isVisible ? (
+            <button className="focus:outline-none" type="button" onClick={toggleVisibility1}>
+              {isVisible1 ? (
                 <HiOutlineEyeSlash className="text-2xl text-default-400 pointer-events-none"/>
               ) : (
                 <HiOutlineEye className="text-2xl text-default-400 pointer-events-none"/>
               )}
             </button>
           }
-          type={isVisible ? "text" : "password"}
+          type={isVisible1 ? "text" : "password"}
           className="mb-4"
         />
 
@@ -187,64 +189,104 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
             setRePass(value);
           }}
           endContent={
-            <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
-              {isVisible ? (
+            <button className="focus:outline-none" type="button" onClick={toggleVisibility2}>
+              {isVisible2 ? (
                 <HiOutlineEyeSlash className="text-2xl text-default-400 pointer-events-none"/>
               ) : (
                 <HiOutlineEye className="text-2xl text-default-400 pointer-events-none"/>
               )}
             </button>
           }
-          type={isVisible ? "text" : "password"}
+          type={isVisible2 ? "text" : "password"}
           className="mb-4"
         />
         <div className={"w-full flex flex-row justify-between gap-12 mb-4"}>
-          <Dropdown>
-            <DropdownTrigger>
-              <Button variant={"bordered"} className={"capitalize"}>
-                {registerState.isMale ? "Male" : "Female"}
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu
-              aria-label="Single selection example"
-              variant="flat"
-              disallowEmptySelection
-              selectionMode={"single"}
-              selectedKeys={"Male"}
-              onSelectionChange={(key) => {
-                registerDispatcher(setIsMale(key[Symbol.iterator]().next().value === "Male"));
-              }}
-            >
-              <DropdownItem key="Male">Male</DropdownItem>
-              <DropdownItem key="Female">Female</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          {/*<Dropdown>*/}
+          {/*  <DropdownTrigger>*/}
+          {/*    <Button variant={"bordered"} className={"capitalize"}>*/}
+          {/*      {registerState.isMale ? "Male" : "Female"}*/}
+          {/*    </Button>*/}
+          {/*  </DropdownTrigger>*/}
+          {/*  <DropdownMenu*/}
+          {/*    aria-label="Single selection example"*/}
+          {/*    variant="flat"*/}
+          {/*    disallowEmptySelection*/}
+          {/*    selectionMode={"single"}*/}
+          {/*    selectedKeys={"Male"}*/}
+          {/*    onSelectionChange={(key) => {*/}
+          {/*      registerDispatcher(setIsMale(key[Symbol.iterator]().next().value === "Male"));*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    <DropdownItem key="Male">Male</DropdownItem>*/}
+          {/*    <DropdownItem key="Female">Female</DropdownItem>*/}
+          {/*  </DropdownMenu>*/}
+          {/*</Dropdown>*/}
+
+          <Select
+            labelPlacement="outside"
+            variant={"flat"}
+            className={"capitalize"}
+            defaultSelectedKeys={["Male"]}
+            required={true}
+            selectionMode={"single"}
+            disallowEmptySelection={true}
+            onSelectionChange={(key) => {
+              registerDispatcher(setIsMale(key[Symbol.iterator]().next().value === "Male"));
+            }}
+          >
+            <SelectItem key={"Male"} value={"Male"}>Male</SelectItem>
+            <SelectItem key={"Female"} value={"Female"}>Female</SelectItem>
+            <SelectItem key={"Other"} value={"Male"}>Other</SelectItem>
+          </Select>
 
 
-          <Dropdown size={"lg"} className={"w-full"}>
-            <DropdownTrigger>
-              <Button variant={"bordered"} className={"capitalize"}>
-                {registerState.role.substring(5).replace('_', ' ').toLowerCase()}
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu
-              aria-label="Single selection Role"
-              variant="flat"
-              disallowEmptySelection
-              selectedKeys={UserRole[1]}
-              onSelectionChange={(key) => {
-                const id: number = key[Symbol.iterator]().next().value;
-                registerDispatcher(setRole(UserRole[id]));
-              }}
-              selectionMode={"single"}
-            >
-              <DropdownItem key={UserRole.ROLE_MANAGER}>Manager</DropdownItem>
-              <DropdownItem key={UserRole.ROLE_DEVELOPER}>Developer</DropdownItem>
-              <DropdownItem key={UserRole.ROLE_TESTER}>Tester</DropdownItem>
-              <DropdownItem key={UserRole.ROLE_PROJECT_LEAD}>Project Lead</DropdownItem>
-              <DropdownItem key={UserRole.ROLE_TEAM_LEAD}>Team Lead</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          {/*<Dropdown size={"lg"} className={"w-full"}>*/}
+          {/*  <DropdownTrigger>*/}
+          {/*    <Button variant={"bordered"} className={"capitalize"}>*/}
+          {/*      {registerState.role.substring(5).replace('_', ' ').toLowerCase()}*/}
+          {/*    </Button>*/}
+          {/*  </DropdownTrigger>*/}
+          {/*  <DropdownMenu*/}
+          {/*    aria-label="Single selection Role"*/}
+          {/*    variant="flat"*/}
+          {/*    disallowEmptySelection*/}
+          {/*    selectedKeys={[UserRole[1]]}*/}
+          {/*    onSelectionChange={(key) => {*/}
+          {/*      const id: number = key[Symbol.iterator]().next().value;*/}
+          {/*      registerDispatcher(setRole(UserRole[id]));*/}
+          {/*    }}*/}
+          {/*    selectionMode={"single"}*/}
+          {/*  >*/}
+          {/*    <DropdownItem key={UserRole.ROLE_MANAGER}>Manager</DropdownItem>*/}
+          {/*    <DropdownItem key={UserRole.ROLE_DEVELOPER}>Developer</DropdownItem>*/}
+          {/*    <DropdownItem key={UserRole.ROLE_TESTER}>Tester</DropdownItem>*/}
+          {/*    <DropdownItem key={UserRole.ROLE_PROJECT_LEAD}>Project Lead</DropdownItem>*/}
+          {/*    <DropdownItem key={UserRole.ROLE_TEAM_LEAD}>Team Lead</DropdownItem>*/}
+          {/*  </DropdownMenu>*/}
+          {/*</Dropdown>*/}
+
+          <Select
+            labelPlacement="outside"
+            variant={"flat"}
+            className={"capitalize"}
+            defaultSelectedKeys={["4"]}
+            required={true}
+            selectionMode={"single"}
+            disallowEmptySelection={true}
+            onSelectionChange={(key) => {
+              console.log(key);
+              const id: number = key[Symbol.iterator]().next().value;
+              registerDispatcher(setRole(UserRole[id]));
+            }}
+          >
+            <SelectItem key={UserRole.ROLE_MANAGER} value={UserRole.ROLE_MANAGER}>Manager</SelectItem>
+            <SelectItem key={UserRole.ROLE_DEVELOPER} value={UserRole.ROLE_DEVELOPER}>Developer</SelectItem>
+            <SelectItem key={UserRole.ROLE_TESTER} value={UserRole.ROLE_TESTER}>Tester</SelectItem>
+            <SelectItem key={UserRole.ROLE_PROJECT_LEAD} value={UserRole.ROLE_PROJECT_LEAD}>Project Lead</SelectItem>
+            <SelectItem key={UserRole.ROLE_TEAM_LEAD} value={UserRole.ROLE_TEAM_LEAD}>Team Lead</SelectItem>
+          </Select>
+
+
         </div>
 
 

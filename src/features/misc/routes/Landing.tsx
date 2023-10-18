@@ -15,10 +15,10 @@ export const Landing = () => {
             <h1 className={"text-8xl"}>Teams</h1>
             <h1 className={"text-8xl"}>Together</h1>
           </div>
-          <h2 className={"text-lg mt-4"}> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium earum
-            expedita optio pariatur.
-            Ducimus ea eaque eos eum excepturi explicabo fugit itaque mollitia omnis, praesentium quisquam sint sunt
-            temporibus voluptatum.</h2>
+          <h2 className={"text-lg mt-4"}> Unlock the power of seamless bug tracking across multiple teams and members
+            with our feature-rich webapp. Streamline your workflow, enhance collaboration, and supercharge productivity
+            as you take control of every bug, ensuring a smoother development process. Get ready to transform the way
+            you handle issues and enjoy a more efficient and effective bug tracking experience.</h2>
           <Button radius={"full"} color={"primary"} size={"lg"} onClick={() => {
             if (user.data?.success) {
               navigate("/app/");

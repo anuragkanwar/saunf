@@ -14,10 +14,11 @@ export const BugSeverityChart = ({ data /* see data tab */ }: { data: any }) => 
     ]}
     indexBy="country"
     margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-    padding={0.3}
+    padding={0.2}
     valueScale={{ type: 'linear' }}
     indexScale={{ type: 'band', round: true }}
     colors={{ scheme: 'nivo' }}
+    groupMode={"grouped"}
     defs={[
       {
         id: 'dots',
@@ -97,8 +98,9 @@ export const BugSeverityChart = ({ data /* see data tab */ }: { data: any }) => 
         direction: 'row',
         justify: false,
         translateX: 0,
-        translateY: 56,
-        itemsSpacing: 2,
+        translateY: 80,
+        itemsSpacing: 8,
+        symbolSpacing: 4,
         itemWidth: 100,
         itemHeight: 20,
         itemDirection: 'left-to-right',

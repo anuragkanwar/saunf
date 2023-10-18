@@ -8,7 +8,7 @@ import {
 import { IconType } from "react-icons";
 import LOGO from "@/assets/Images/logo-dark.png";
 import clsx from "clsx";
-import { NavLink, } from "react-router-dom";
+import { NavLink, useNavigate, } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useWindowSize } from "usehooks-ts";
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
@@ -159,6 +159,7 @@ type SidebarType = {
 
 export const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: SidebarType) => {
   const window = useWindowSize();
+  const navigate = useNavigate();
   const [isSmallerScreen, setIsSmallerScreen] = useState(false);
   useEffect(() => {
     if (window.width < 768) {
@@ -192,7 +193,7 @@ export const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: SidebarType) => {
       <motion.div className={clsx(["flex w-full flex-col"])}>
         <div className=" flex h-0 flex-1 flex-col">
           <div className="flex h-16 items-center px-2 text-white rounded-br-md bg-primary-600">
-            <Image src={LOGO} width={50} height={80}/>
+            <Image onClick={() => navigate("/app/")} src={LOGO} className={"mr-4"} width={50} height={80}/>
           </div>
           <div className="flex-1 mt-2 max-h-full bg-white rounded-t-md overflow-y-scroll">
             <nav className="flex-1 py-4">

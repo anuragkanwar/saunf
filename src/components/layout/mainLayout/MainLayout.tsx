@@ -103,10 +103,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
                   </DropdownTrigger>
                   <DropdownMenu aria-label={"Profile Actions"} variant={"flat"}>
                     <DropdownSection showDivider>
-                      <DropdownItem key="profile">
-                        Profile
-                      </DropdownItem>
-                      <DropdownItem key="settings">
+                      <DropdownItem key="settings" onClick={() => navigate("/app/settings")}>
                         Account Settings
                       </DropdownItem>
                     </DropdownSection>

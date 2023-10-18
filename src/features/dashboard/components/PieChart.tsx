@@ -116,11 +116,13 @@ export const PieChart = ({ data }: PieChartProps) => {
       ]}
       legends={[
         {
+          itemsSpacing: 8,
+          symbolSpacing: 4,
           anchor: 'bottom',
           direction: 'row',
           justify: false,
           translateX: 0,
-          translateY: 56,
+          translateY: 80,
           itemWidth: 80,
           itemHeight: 18,
           itemTextColor: '#999',
